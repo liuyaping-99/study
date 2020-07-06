@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "5287658",
+      "name": "错",
+      "font_class": "cuo",
+      "unicode": "e646",
+      "unicode_decimal": 58950
+    },
+    {
+      "icon_id": "8802648",
+      "name": "对",
+      "font_class": "dui",
+      "unicode": "e64d",
+      "unicode_decimal": 58957
+    },
+    {
       "icon_id": "1621038",
       "name": "A",
       "font_class": "A",
@@ -88,6 +102,13 @@
       "font_class": "gengduo",
       "unicode": "e662",
       "unicode_decimal": 58978
+    },
+    {
+      "icon_id": "15739937",
+      "name": "收藏",
+      "font_class": "shoucang-copy",
+      "unicode": "e838",
+      "unicode_decimal": 59448
     }
   ]
 }

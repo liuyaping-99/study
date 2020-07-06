@@ -2,34 +2,38 @@
   <div class="detail">
     <div class="header">
       <i class="icon iconfont icon-fanhui" @click="goback"></i>
-      <i class="icon iconfont icon-gengduo"></i>
+      <i class="icon iconfont icon-gengduo" @click="goMore"></i>
     </div>
     <div class="container">
       <div class="question">
         <p class="title">1.多少歲或以下的幼童在前座必須使用合規格的兒童乘車束縛設備？</p>
-        <p class="shoucang">
-          <i class="icon iconfont icon-shoucang"></i>
+        <p class="shoucang" @click="collect">
+          <i class="icon iconfont icon-shoucang-copy" v-show="isCollected"></i>
+          <i class="icon iconfont icon-shoucang" v-show="isCollect"></i>
           收藏
         </p>
       </div>
 
       <ul>
-        <li>
-          <p class="answer">
-            <i class="icon iconfont icon-A"></i>
-           <span>1嵗</span> 
+        <li @click="choose" :class="ischoose?answer1:''">
+          <p>
+            <i class="icon iconfont icon-cuo" v-show="answered"></i>
+            <i class="icon iconfont icon-A" v-show="answereded"></i>
+            <span>1嵗</span>
           </p>
         </li>
-        <li>
-          <p class="answer">
-            <i class="icon iconfont icon-B"></i>
-            <span>2嵗</span>
+        <li @click="choose" :class="isCorrect?answer2:''">
+          <p>
+            <i class="icon iconfont icon-dui" v-show="correct"></i>
+            <i class="icon iconfont icon-B" v-show="noCorrect"></i>
+            <span @click="choose">2嵗</span>
           </p>
         </li>
-        <li>
-          <p class="answer">
-            <i class="icon iconfont icon-C"></i>
-            <span>3嵗</span>
+        <li @click="choose" :class="ischoose?answer1:''">
+          <p>
+            <i class="icon iconfont icon-cuo" v-show="answered"></i>
+            <i class="icon iconfont icon-C" v-show="answereded"></i>
+            <span @click="choose">3嵗</span>
           </p>
         </li>
       </ul>
@@ -40,9 +44,50 @@
 
 <script>
 export default {
-  methods:{
-    goback(){
-      this.$router.go(-1)
+  data() {
+    return {
+      isCollect: true,
+      isCollected: false,
+      answer: "2嵗",
+      answered: false,
+      answereded: true,
+      ischoose: false,
+      answer1: "answer",
+      answer2: "answered",
+      correct: false,
+      noCorrect: true,
+      isCorrect: false
+    };
+  },
+  methods: {
+    goback() {
+       this.$router.push({
+        path: "/",
+      });
+    },
+    goMore() {
+      this.$router.push({
+        path: "questionList",
+      });
+    },
+    collect() {
+      this.isCollect = !this.isCollect;
+      this.isCollected = !this.isCollected;
+    },
+    choose(e) {
+      // console.log(e.target.innerText);
+      if (e.target.innerText == this.answer) {
+        this.correct = true;
+        this.noCorrect = false;
+        this.isCorrect = true;
+      } else {
+        this.answered = true;
+        this.answereded = false;
+        this.correct = true;
+        this.noCorrect = false;
+        this.ischoose = true;
+        this.isCorrect = true;
+      }
     }
   }
 };
@@ -66,6 +111,7 @@ export default {
     margin-right: 0.2rem;
   }
 }
+
 .container {
   margin: 0.3rem;
   .question {
@@ -77,30 +123,48 @@ export default {
   .icon-shoucang {
     color: #babfc7;
   }
+  .icon-shoucang-copy {
+    color: #f4ea2a;
+  }
   .shoucang {
     color: #babfc7;
     font-size: 0.3rem;
   }
   ul {
     margin-top: 2.5rem;
+    .answer {
+      border: 1px solid black;
+    }
+    .answered {
+      border: 1px solid #00ae8e;
+    }
     li {
       list-style: none;
-      border: 1px solid #E1E1E1;
       background: #eceef0;
       height: 1.2rem;
-      margin: 0.1rem;
+      margin: 0.3rem;
       line-height: 1.2rem;
       padding: 0 0.3rem;
+
       .icon-A,
       .icon-B,
       .icon-C {
         color: #909095;
         font-size: 0.5rem;
-        vertical-align:middle;
-
+        vertical-align: middle;
       }
-      span{
-        vertical-align:middle;
+      .icon-dui {
+        color: #00ae8e;
+        font-size: 0.5rem;
+        vertical-align: middle;
+      }
+      .icon-cuo {
+        color: #909095;
+        font-size: 0.5rem;
+        vertical-align: middle;
+      }
+      span {
+        vertical-align: middle;
       }
     }
   }
@@ -120,7 +184,7 @@ export default {
   font-family: "iconfont" !important;
   // font-size: 0.6rem;
   font-style: normal;
-  color: white;
+  // color: white;
   // fill: currentColor;
   -webkit-font-smoothing: antialiased;
   -webkit-text-stroke-width: 0.2px;

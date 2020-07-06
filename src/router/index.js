@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Detail from '../views/Detail.vue'
+import QuestionList from '../views/QuestionList.vue'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,11 @@ Vue.use(VueRouter)
     path: '/detail',
     name: 'Detail',
     component:Detail
+  },
+  {
+    path: '/questionList',
+    name: 'QuestionList',
+    component: QuestionList
   }
 ]
 
